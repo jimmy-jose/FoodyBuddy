@@ -1,13 +1,9 @@
 package app.jimmy.foodybuddy;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.ImageView;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,11 +22,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private ImageView toolBarImage;
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
-    int currentPage = 0;
-    Timer timer;
-    final long DELAY_MS = 5000;
-    final long PERIOD_MS = 8000;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,32 +36,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         mPager.setAdapter(pagerAdapter);
         mPager.addOnPageChangeListener(this);
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        setUpTimer();
-    }
-
-    private void setUpTimer() {
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == SlidingPagerAdapter.NUM_PAGES - 1) {
-                    currentPage = 0;
-                }else {
-                    currentPage++;
-                }
-                mPager.setCurrentItem(currentPage, true);
-            }
-        };
-
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        },DELAY_MS, PERIOD_MS);
 
     }
 
