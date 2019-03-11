@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
     private int currentPage = 0;
-    private final long PERIOD_MS = 3000;
+    private final long PERIOD_MS = 5000;
     private final Handler handler = new Handler();
     private final Runnable update = new Runnable() {
         public void run() {
